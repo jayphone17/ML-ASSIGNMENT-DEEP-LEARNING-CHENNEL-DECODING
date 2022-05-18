@@ -19,11 +19,14 @@ train_SNR_Eb = 1            # training-Eb/No
 # nb_epoch = 2**10            # number of learning epochs
 # nb_epoch = 2**12            # number of learning epochs
 # nb_epoch = 2**14            # number of learning epochs
-# nb_epoch = 2**16            # number of learning epochs
-nb_epoch = 2**18            # number of learning epochs
+nb_epoch = 2**16            # number of learning epochs
+# nb_epoch = 2**18            # number of learning epochs
 
 code = 'polar'              # type of code ('random' or 'polar')
-design = [128, 64, 32]      # each list entry defines the number of nodes in a layer
+# design = [128, 64, 32]      # each list entry defines the number of nodes in a layer
+# design = [256, 126, 64]
+# design = [512, 256, 128]
+design = [1024, 512, 256]
 batch_size = 256            # size of batches for calculation the gradient
 LLR = False                 # 'True' enables the log-likelihood-ratio layer
 optimizer = 'Adam'           
@@ -228,6 +231,7 @@ elif code == 'random':
 # TRAIN THE MODEL
 model.summary()
 history = model.fit(x, d, batch_size=batch_size, epochs=nb_epoch, verbose=2, shuffle=True)
+model.save_weights("./checkpoints/weights.pt")
 
 # Test the NN
 test_batch = 1000  
